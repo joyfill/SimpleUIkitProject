@@ -1,0 +1,1283 @@
+ {
+      "_id" : "695e36f2ec467a1860e1cac8",
+      "fields" : [
+        {
+          "file" : "695e36f283142b6b2f8bf493",
+          "options" : [
+            {
+              "value" : "Yes",
+              "_id" : "695e357dfc6d3bdb3ace38fb",
+              "deleted" : false
+            },
+            {
+              "value" : "No",
+              "_id" : "695e357db10d64be4c2587d6",
+              "deleted" : false
+            },
+            {
+              "_id" : "695e357dc329b648ff0353c2",
+              "deleted" : false,
+              "value" : "N/A"
+            }
+          ],
+          "_id" : "dropdown1",
+          "title" : "Dropdown",
+          "identifier" : "field_dropdown1",
+          "type" : "dropdown"
+        },
+        {
+          "value" : "Header",
+          "_id" : "block3",
+          "title" : "Heading Text",
+          "identifier" : "field_block3",
+          "type" : "block",
+          "file" : "695e36f283142b6b2f8bf493"
+        },
+        {
+          "value" : "Display text",
+          "title" : "Display Text",
+          "_id" : "block2",
+          "identifier" : "field_block2",
+          "type" : "block",
+          "file" : "695e36f283142b6b2f8bf493"
+        },
+        {
+          "_id" : "collection2",
+          "schema" : {
+            "level1Table1" : {
+              "hidden" : false,
+              "title" : "New Table",
+              "children" : [
+
+              ],
+              "tableColumns" : [
+                {
+                  "deleted" : false,
+                  "_id" : "text1",
+                  "title" : "Text Column",
+                  "type" : "text",
+                  "width" : 0,
+                  "required" : true
+                },
+                {
+                  "deleted" : false,
+                  "_id" : "number1",
+                  "title" : "Number Column",
+                  "identifier" : "collection2_column_number1",
+                  "width" : 0,
+                  "type" : "number"
+                }
+              ]
+            },
+            "collectionSchemaId" : {
+              "required" : false,
+              "title" : "Main Collection",
+              "root" : true,
+              "children" : [
+                "level1Table1"
+              ],
+              "tableColumns" : [
+                {
+                  "_id" : "dropdown1",
+                  "deleted" : false,
+                  "title" : "Dropdown Column",
+                  "width" : 0,
+                  "identifier" : "collection2_column_dropdown1",
+                  "type" : "dropdown",
+                  "required" : true,
+                  "options" : [
+                    {
+                      "_id" : "69a825dd200ec8dade7d690e",
+                      "deleted" : false,
+                      "value" : "Yes"
+                    },
+                    {
+                      "_id" : "69a825dd3910c78c4d6e342c",
+                      "value" : "No",
+                      "deleted" : false
+                    },
+                    {
+                      "value" : "N/A",
+                      "deleted" : false,
+                      "_id" : "69a825ddf8e4f39f041a53b2"
+                    }
+                  ]
+                },
+                {
+                  "deleted" : false,
+                  "_id" : "text1",
+                  "title" : "Text Column",
+                  "width" : 0,
+                  "type" : "text",
+                  "identifier" : "collection2_column_text1"
+                }
+              ]
+            }
+          },
+          "file" : "695e36f283142b6b2f8bf493",
+          "title" : "Collection (only 1st columns)",
+          "identifier" : "field_collection2",
+          "value" : [
+            {
+              "cells" : {
+                "dropdown1" : "69a825dd200ec8dade7d690e"
+              },
+              "tz" : "Europe/Kiev",
+              "_id" : "69a825f16e0084546af9d75c",
+              "children" : {
+                "level1Table1" : {
+                  "value" : [
+                    {
+                      "cells" : {
+                        "text1" : "7"
+                      },
+                      "tz" : "Europe/Kiev",
+                      "_id" : "69a825f315e0c3805bb5eb71",
+                      "children" : {
+
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "type" : "collection",
+          "required" : false
+        },
+        {
+          "_id" : "collection1",
+          "schema" : {
+            "level1Table1" : {
+              "hidden" : false,
+              "title" : "New Table",
+              "required" : false,
+              "tableColumns" : [
+                {
+                  "deleted" : false,
+                  "_id" : "text1",
+                  "title" : "Text Column",
+                  "width" : 0,
+                  "required" : true,
+                  "type" : "text"
+                },
+                {
+                  "_id" : "dropdown1",
+                  "deleted" : false,
+                  "title" : "Dropdown Column",
+                  "width" : 0,
+                  "identifier" : "collection1_column_dropdown1",
+                  "type" : "dropdown",
+                  "options" : [
+                    {
+                      "value" : "Yes",
+                      "_id" : "695e37a49f0fcf5e42c022ca",
+                      "deleted" : false
+                    },
+                    {
+                      "deleted" : false,
+                      "_id" : "695e37a4aa8627f1678b7bf7",
+                      "value" : "No"
+                    },
+                    {
+                      "value" : "N/A",
+                      "deleted" : false,
+                      "_id" : "695e37a41222f8686cbc3603"
+                    }
+                  ]
+                },
+                {
+                  "_id" : "image1",
+                  "multi" : true,
+                  "deleted" : false,
+                  "width" : 0,
+                  "title" : "Image Column",
+                  "identifier" : "collection1_column_image1",
+                  "type" : "image"
+                }
+              ],
+              "children" : [
+
+              ]
+            },
+            "collectionSchemaId" : {
+              "tableColumns" : [
+                {
+                  "_id" : "dropdown1",
+                  "deleted" : false,
+                  "title" : "Dropdown Column",
+                  "width" : 0,
+                  "identifier" : "collection1_column_dropdown1",
+                  "type" : "dropdown",
+                  "options" : [
+                    {
+                      "value" : "Yes",
+                      "deleted" : false,
+                      "_id" : "695e378d7866b81ee106e437"
+                    },
+                    {
+                      "_id" : "695e378d34e50e4475b2f5da",
+                      "deleted" : false,
+                      "value" : "No"
+                    },
+                    {
+                      "_id" : "695e378db37fde2f2c81fa1c",
+                      "deleted" : false,
+                      "value" : "N/A"
+                    }
+                  ],
+                  "required" : true
+                },
+                {
+                  "deleted" : false,
+                  "title" : "Label Column",
+                  "_id" : "block1",
+                  "width" : 0,
+                  "identifier" : "collection1_column_block1",
+                  "type" : "block"
+                },
+                {
+                  "deleted" : false,
+                  "title" : "Barcode Column",
+                  "_id" : "barcode1",
+                  "type" : "barcode",
+                  "identifier" : "collection1_column_barcode1",
+                  "width" : 0
+                },
+                {
+                  "deleted" : false,
+                  "title" : "Date Column",
+                  "_id" : "date1",
+                  "width" : 0,
+                  "identifier" : "collection1_column_date1",
+                  "type" : "date"
+                }
+              ],
+              "title" : "Main Collection",
+              "required" : true,
+              "children" : [
+                "level1Table1"
+              ],
+              "root" : true
+            }
+          },
+          "title" : "Collection (both full and 1st columns)",
+          "file" : "695e36f283142b6b2f8bf493",
+          "identifier" : "field_collection1",
+          "value" : [
+            {
+              "cells" : {
+                "barcode1" : "",
+                "dropdown1" : "695e378d7866b81ee106e437"
+              },
+              "tz" : "Europe/Zagreb",
+              "_id" : "695e37ab5c649d9ad7e7bec4",
+              "children" : {
+                "level1Table1" : {
+                  "value" : [
+                    {
+                      "cells" : {
+                        "text1" : "Text"
+                      },
+                      "tz" : "Europe/Kiev",
+                      "_id" : "695e37b1e74f99df16482db7",
+                      "children" : {
+
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "cells" : {
+                "barcode1" : "",
+                "dropdown1" : "695e378d7866b81ee106e437"
+              },
+              "tz" : "Europe/Zagreb",
+              "_id" : "69a80c893cbf2a44e95be610",
+              "children" : {
+                "level1Table1" : {
+
+                }
+              }
+            }
+          ],
+          "type" : "collection",
+          "required" : true,
+          "metadata" : {
+
+          }
+        },
+        {
+          "title" : "Image",
+          "_id" : "image1",
+          "file" : "695e36f283142b6b2f8bf493",
+          "type" : "image",
+          "identifier" : "field_image1"
+        },
+        {
+          "_id" : "textarea1",
+          "title" : "Multiline Text",
+          "identifier" : "field_textarea1",
+          "type" : "textarea",
+          "file" : "695e36f283142b6b2f8bf493"
+        },
+        {
+          "_id" : "multiSelect2",
+          "multi" : false,
+          "file" : "695e36f283142b6b2f8bf493",
+          "title" : "Single Choice",
+          "identifier" : "field_multiSelect2",
+          "value" : [
+
+          ],
+          "type" : "multiSelect",
+          "options" : [
+            {
+              "deleted" : false,
+              "_id" : "695e357d32af7bcf81223a6a",
+              "value" : "Yes"
+            },
+            {
+              "value" : "No",
+              "deleted" : false,
+              "_id" : "695e357d478876dd5a6d0e40"
+            },
+            {
+              "deleted" : false,
+              "_id" : "695e357d7c90fa6bc4f24d7d",
+              "value" : "N/A"
+            }
+          ]
+        },
+        {
+          "_id" : "image2",
+          "multi" : true,
+          "title" : "Image",
+          "file" : "695e36f283142b6b2f8bf493",
+          "identifier" : "field_image2",
+          "type" : "image"
+        },
+        {
+          "_id" : "multiSelect1",
+          "multi" : true,
+          "title" : "Multiple Choice",
+          "file" : "695e36f283142b6b2f8bf493",
+          "identifier" : "field_multiSelect1",
+          "value" : [
+
+          ],
+          "type" : "multiSelect",
+          "options" : [
+            {
+              "deleted" : false,
+              "value" : "Yes",
+              "_id" : "695e357da6309457c54b4292"
+            },
+            {
+              "_id" : "695e357dfd9157902d486043",
+              "value" : "No",
+              "deleted" : false
+            },
+            {
+              "value" : "N/A",
+              "_id" : "695e357d55694ccc4e94dc3b",
+              "deleted" : false
+            }
+          ]
+        },
+        {
+          "_id" : "table3",
+          "tableColumnOrder" : [
+            "text1",
+            "dropdown1",
+            "text2"
+          ],
+          "file" : "695e36f283142b6b2f8bf493",
+          "title" : "Table (only full, no columns)",
+          "identifier" : "field_table3",
+          "value" : [
+            {
+              "deleted" : false,
+              "_id" : "69a80ec7b67ea51481a5033f",
+              "cells" : {
+
+              }
+            },
+            {
+              "_id" : "69a80ec7a36734b0136eb55b",
+              "deleted" : false,
+              "cells" : {
+
+              }
+            },
+            {
+              "cells" : {
+
+              },
+              "_id" : "69a80ec77663b708a8e0b107",
+              "deleted" : false
+            }
+          ],
+          "type" : "table",
+          "required" : true,
+          "tableColumns" : [
+            {
+              "deleted" : false,
+              "title" : "Text Column",
+              "_id" : "text1",
+              "width" : 0,
+              "identifier" : "table3_column_text1",
+              "type" : "text"
+            },
+            {
+              "_id" : "dropdown1",
+              "deleted" : false,
+              "title" : "Dropdown Column",
+              "width" : 0,
+              "identifier" : "table3_column_dropdown1",
+              "type" : "dropdown",
+              "options" : [
+                {
+                  "_id" : "69a80ec7089f881a5e0c2dc9",
+                  "deleted" : false,
+                  "value" : "Yes"
+                },
+                {
+                  "value" : "No",
+                  "deleted" : false,
+                  "_id" : "69a80ec7668cda9b1ec6d6bd"
+                },
+                {
+                  "_id" : "69a80ec75bd86b32ae196362",
+                  "deleted" : false,
+                  "value" : "N/A"
+                }
+              ]
+            },
+            {
+              "deleted" : false,
+              "_id" : "text2",
+              "title" : "Text Column",
+              "identifier" : "table3_column_text2",
+              "type" : "text",
+              "width" : 0
+            }
+          ],
+          "rowOrder" : [
+            "69a80ec7b67ea51481a5033f",
+            "69a80ec7a36734b0136eb55b",
+            "69a80ec77663b708a8e0b107"
+          ]
+        },
+        {
+          "_id" : "date3",
+          "title" : "Date Time",
+          "file" : "695e36f283142b6b2f8bf493",
+          "identifier" : "field_date3",
+          "type" : "date"
+        },
+        {
+          "schema" : {
+            "level1Table1" : {
+              "children" : [
+
+              ],
+              "title" : "New Table",
+              "tableColumns" : [
+                {
+                  "deleted" : false,
+                  "_id" : "text1",
+                  "title" : "Text Column",
+                  "width" : 0,
+                  "type" : "text"
+                },
+                {
+                  "_id" : "dropdown1",
+                  "deleted" : false,
+                  "width" : 0,
+                  "title" : "Dropdown Column",
+                  "identifier" : "collection3_column_dropdown1",
+                  "type" : "dropdown",
+                  "options" : [
+                    {
+                      "value" : "Yes",
+                      "_id" : "69a8262299e062e24e95032f",
+                      "deleted" : false
+                    },
+                    {
+                      "deleted" : false,
+                      "value" : "No",
+                      "_id" : "69a82622eb046b47a897e040"
+                    },
+                    {
+                      "_id" : "69a826229bad878a43bd066f",
+                      "deleted" : false,
+                      "value" : "N/A"
+                    }
+                  ]
+                }
+              ],
+              "hidden" : false
+            },
+            "collectionSchemaId" : {
+              "root" : true,
+              "title" : "Main Collection",
+              "required" : false,
+              "tableColumns" : [
+                {
+                  "deleted" : false,
+                  "_id" : "text1",
+                  "title" : "Text Column",
+                  "width" : 0,
+                  "type" : "text",
+                  "identifier" : "collection3_column_text1"
+                },
+                {
+                  "_id" : "dropdown1",
+                  "deleted" : false,
+                  "width" : 0,
+                  "title" : "Dropdown Column",
+                  "identifier" : "collection3_column_dropdown1",
+                  "type" : "dropdown",
+                  "options" : [
+                    {
+                      "deleted" : false,
+                      "_id" : "69a82617763ac0a9cb646b30",
+                      "value" : "Yes"
+                    },
+                    {
+                      "value" : "No",
+                      "deleted" : false,
+                      "_id" : "69a826178f06c5716f16144e"
+                    },
+                    {
+                      "_id" : "69a826171ebc9cc4b201c2b6",
+                      "deleted" : false,
+                      "value" : "N/A"
+                    }
+                  ]
+                },
+                {
+                  "deleted" : false,
+                  "title" : "Image Column",
+                  "_id" : "image1",
+                  "type" : "image",
+                  "width" : 0,
+                  "identifier" : "collection3_column_image1"
+                }
+              ],
+              "children" : [
+                "level1Table1"
+              ]
+            }
+          },
+          "_id" : "collection3",
+          "file" : "695e36f283142b6b2f8bf493",
+          "title" : "Collection (only full, no columns)",
+          "identifier" : "field_collection3",
+          "value" : [
+            {
+              "_id" : "69a8262709da54ae8c1406b1",
+              "cells" : {
+
+              },
+              "children" : {
+                "level1Table1" : {
+                  "value" : [
+                    {
+                      "cells" : {
+
+                      },
+                      "_id" : "69a826296544e8878a46b98b",
+                      "children" : {
+
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "type" : "collection",
+          "required" : false
+        },
+        {
+          "title" : "Text",
+          "_id" : "text1",
+          "type" : "text",
+          "identifier" : "field_text1",
+          "file" : "695e36f283142b6b2f8bf493"
+        },
+        {
+          "_id" : "table4",
+          "rowOrder" : [
+            "69a80ec7b67ea51481a5033f",
+            "69a80ec7a36734b0136eb55b",
+            "69a80ec77663b708a8e0b107"
+          ],
+          "file" : "695e36f283142b6b2f8bf493",
+          "title" : "Table (only 'req' columns)",
+          "identifier" : "field_table4",
+          "value" : [
+            {
+              "cells" : {
+                "text2" : "d",
+                "dropdown1" : "69a80ec7089f881a5e0c2dc9"
+              },
+              "deleted" : false,
+              "tz" : "Europe/Kiev",
+              "_id" : "69a80ec7b67ea51481a5033f"
+            },
+            {
+              "cells" : {
+                "text2" : "C",
+                "dropdown1" : "69a80ec7089f881a5e0c2dc9"
+              },
+              "tz" : "Europe/Kiev",
+              "_id" : "69a80ec7a36734b0136eb55b",
+              "deleted" : false
+            },
+            {
+              "cells" : {
+                "text2" : "Ccc",
+                "dropdown1" : "69a80ec7089f881a5e0c2dc9"
+              },
+              "deleted" : false,
+              "_id" : "69a80ec77663b708a8e0b107",
+              "tz" : "Europe/Kiev"
+            }
+          ],
+          "type" : "table",
+          "metadata" : {
+
+          },
+          "tableColumns" : [
+            {
+              "deleted" : false,
+              "title" : "Text Column",
+              "_id" : "text1",
+              "identifier" : "table4_column_text1",
+              "width" : 0,
+              "type" : "text"
+            },
+            {
+              "_id" : "dropdown1",
+              "deleted" : false,
+              "width" : 0,
+              "title" : "Dropdown Column req",
+              "identifier" : "table4_column_dropdown1",
+              "type" : "dropdown",
+              "required" : true,
+              "options" : [
+                {
+                  "_id" : "69a80ec7089f881a5e0c2dc9",
+                  "value" : "Yes",
+                  "deleted" : false
+                },
+                {
+                  "deleted" : false,
+                  "value" : "No",
+                  "_id" : "69a80ec7668cda9b1ec6d6bd"
+                },
+                {
+                  "deleted" : false,
+                  "_id" : "69a80ec75bd86b32ae196362",
+                  "value" : "N/A"
+                }
+              ]
+            },
+            {
+              "_id" : "text2",
+              "deleted" : false,
+              "title" : "Text Column req",
+              "width" : 0,
+              "identifier" : "table4_column_text2",
+              "type" : "text",
+              "required" : true
+            }
+          ],
+          "tableColumnOrder" : [
+            "text1",
+            "dropdown1",
+            "text2"
+          ]
+        },
+        {
+          "xTitle" : "Horizontal",
+          "yMax" : 100,
+          "_id" : "chart1",
+          "yTitle" : "Vertical",
+          "xMax" : 100,
+          "title" : "Chart",
+          "file" : "695e36f283142b6b2f8bf493",
+          "identifier" : "field_chart1",
+          "yMin" : 0,
+          "type" : "chart",
+          "xMin" : 0
+        },
+        {
+          "title" : "Date Time",
+          "_id" : "date2",
+          "identifier" : "field_date2",
+          "type" : "date",
+          "file" : "695e36f283142b6b2f8bf493"
+        },
+        {
+          "title" : "Date Time",
+          "_id" : "date1",
+          "file" : "695e36f283142b6b2f8bf493",
+          "identifier" : "field_date1",
+          "type" : "date"
+        },
+        {
+          "_id" : "block4",
+          "title" : "Empty Space",
+          "identifier" : "field_block4",
+          "type" : "block",
+          "file" : "695e36f283142b6b2f8bf493"
+        },
+        {
+          "title" : "Number",
+          "_id" : "number1",
+          "identifier" : "field_number1",
+          "file" : "695e36f283142b6b2f8bf493",
+          "type" : "number"
+        },
+        {
+          "_id" : "multiSelect3",
+          "file" : "695e36f283142b6b2f8bf493",
+          "title" : "Checkbox",
+          "identifier" : "field_multiSelect3",
+          "value" : [
+
+          ],
+          "type" : "multiSelect",
+          "options" : [
+            {
+              "_id" : "695e357d6d35e7667df8432f",
+              "deleted" : false,
+              "value" : "Option 1"
+            }
+          ]
+        },
+        {
+          "_id" : "signature1",
+          "title" : "Signature",
+          "identifier" : "field_signature1",
+          "type" : "signature",
+          "file" : "695e36f283142b6b2f8bf493"
+        },
+        {
+          "value" : "Heading",
+          "title" : "Heading Text",
+          "_id" : "block1",
+          "type" : "block",
+          "file" : "695e36f283142b6b2f8bf493",
+          "identifier" : "field_block1"
+        },
+        {
+          "_id" : "table2",
+          "rowOrder" : [
+            "69a80ec7b67ea51481a5033f",
+            "69a80ec7a36734b0136eb55b",
+            "69a80ec77663b708a8e0b107"
+          ],
+          "required" : true,
+          "title" : "Table (both full and 'req' columns)",
+          "file" : "695e36f283142b6b2f8bf493",
+          "identifier" : "field_table2",
+          "value" : [
+            {
+              "cells" : {
+                "text2" : "vvvgg",
+                "dropdown2" : "",
+                "image2" : [
+                  {
+                    "url" : "https://s3.amazonaws.com/qa1-st-attachments/2460920695065217_dc19c21434084aa0aa7974a217962603.jpg",
+                    "_id" : "69a99858ab7bec433e691f5d"
+                  }
+                ]
+              },
+              "tz" : "Europe/Kiev",
+              "_id" : "69a80ec7b67ea51481a5033f",
+              "deleted" : false
+            },
+            {
+              "cells" : {
+                "text2" : "Text",
+                "dropdown2" : "69a811f2d9427e2b5667484c",
+                "image2" : [
+                  {
+                    "_id" : "69a97ee98fde84f710da9c6a",
+                    "url" : "https://s3.amazonaws.com/qa1-st-attachments/2460807439665793_5ba7246d004149b6b6c7e0c3204759a6.jpg"
+                  }
+                ]
+              },
+              "tz" : "Europe/Kiev",
+              "_id" : "69a80ec7a36734b0136eb55b",
+              "deleted" : false
+            },
+            {
+              "cells" : {
+                "text1" : "",
+                "image2" : [
+                  {
+                    "url" : "https://s3.amazonaws.com/qa1-st-attachments/2461004020353665_8be0d60a095c23d0d6e259291ef82dd3.jpg",
+                    "_id" : "69a9ac9d605d0b9c20a8b890"
+                  }
+                ],
+                "text2" : "Test",
+                "dropdown2" : ""
+              },
+              "deleted" : false,
+              "tz" : "Europe/Kiev",
+              "_id" : "69a80ec77663b708a8e0b107"
+            }
+          ],
+          "type" : "table",
+          "tableColumnOrder" : [
+            "text1",
+            "text2",
+            "dropdown1",
+            "dropdown2",
+            "image1",
+            "image2"
+          ],
+          "metadata" : {
+
+          },
+          "tableColumns" : [
+            {
+              "deleted" : false,
+              "title" : "Text Column",
+              "_id" : "text1",
+              "identifier" : "table2_column_text1",
+              "width" : 0,
+              "type" : "text"
+            },
+            {
+              "_id" : "dropdown1",
+              "deleted" : false,
+              "width" : 0,
+              "title" : "Dropdown Column",
+              "identifier" : "table2_column_dropdown1",
+              "type" : "dropdown",
+              "options" : [
+                {
+                  "_id" : "69a80ec7089f881a5e0c2dc9",
+                  "value" : "Yes",
+                  "deleted" : false
+                },
+                {
+                  "_id" : "69a80ec7668cda9b1ec6d6bd",
+                  "value" : "No",
+                  "deleted" : false
+                },
+                {
+                  "_id" : "69a80ec75bd86b32ae196362",
+                  "value" : "N/A",
+                  "deleted" : false
+                }
+              ]
+            },
+            {
+              "_id" : "text2",
+              "deleted" : false,
+              "title" : "Text Column req",
+              "width" : 0,
+              "identifier" : "table2_column_text2",
+              "type" : "text",
+              "required" : true
+            },
+            {
+              "_id" : "dropdown2",
+              "deleted" : false,
+              "title" : "Dropdown Column req",
+              "width" : 0,
+              "identifier" : "table2_column_dropdown2",
+              "type" : "dropdown",
+              "required" : true,
+              "options" : [
+                {
+                  "value" : "Yes",
+                  "deleted" : false,
+                  "_id" : "69a811f2d9427e2b5667484c"
+                },
+                {
+                  "_id" : "69a811f2b4513f94c6e0ee8e",
+                  "deleted" : false,
+                  "value" : "No"
+                },
+                {
+                  "_id" : "69a811f2883839d2e61de1d1",
+                  "deleted" : false,
+                  "value" : "N/A"
+                }
+              ]
+            },
+            {
+              "deleted" : false,
+              "title" : "Image Column",
+              "_id" : "image1",
+              "type" : "image",
+              "identifier" : "table2_column_image1"
+            },
+            {
+              "deleted" : false,
+              "title" : "Image Column req",
+              "_id" : "image2",
+              "identifier" : "table2_column_image2",
+              "type" : "image",
+              "required" : true
+            }
+          ]
+        }
+      ],
+      "deleted" : false,
+      "identifier" : "doc_695e36f2ec467a1860e1cac8",
+      "createdOn" : 1767782130528,
+      "type" : "document",
+      "name" : "New Doc",
+      "files" : [
+        {
+          "header" : {
+            "layout" : "grid",
+            "height" : 50,
+            "fields" : [
+
+            ],
+            "cols" : 24,
+            "fieldPositions" : [
+              {
+                "fontSize" : 28,
+                "_id" : "695e3700a5132e55cf90d4a3",
+                "x" : 0,
+                "y" : 0,
+                "fontWeight" : "bold",
+                "width" : 12,
+                "height" : 40,
+                "field" : "block3",
+                "type" : "block",
+                "displayType" : "original"
+              }
+            ],
+            "padding" : 0,
+            "rowHeight" : 1
+          },
+          "styles" : {
+            "margin" : 4
+          },
+          "_id" : "695e36f283142b6b2f8bf493",
+          "pages" : [
+            {
+              "height" : 1056,
+              "_id" : "695e36f2c964fbbc2f3ba5ce",
+              "hidden" : false,
+              "presentation" : "normal",
+              "fieldPositions" : [
+                {
+                  "x" : 0,
+                  "fontSize" : 28,
+                  "_id" : "695e36f5691530a502c6be15",
+                  "height" : 5,
+                  "fontWeight" : "bold",
+                  "width" : 4,
+                  "y" : 0,
+                  "field" : "block1",
+                  "displayType" : "original",
+                  "type" : "block"
+                },
+                {
+                  "height" : 5,
+                  "_id" : "695e36f7b5ff46a64430584d",
+                  "x" : 0,
+                  "y" : 5,
+                  "width" : 4,
+                  "field" : "block2",
+                  "type" : "block",
+                  "displayType" : "original"
+                },
+                {
+                  "x" : 6,
+                  "height" : 23,
+                  "_id" : "695e3708e0019ecfbf3b252d",
+                  "y" : 0,
+                  "width" : 2,
+                  "field" : "image1",
+                  "type" : "image",
+                  "displayType" : "original"
+                },
+                {
+                  "_id" : "695e3718d59115e0ee3e53f3",
+                  "x" : 0,
+                  "height" : 13,
+                  "y" : 10,
+                  "width" : 6,
+                  "borderColor" : "transparent",
+                  "field" : "block4",
+                  "displayType" : "original",
+                  "type" : "block",
+                  "backgroundColor" : "transparent"
+                },
+                {
+                  "_id" : "695e37261fa605d3977192b0",
+                  "x" : 0,
+                  "height" : 8,
+                  "y" : 23,
+                  "width" : 4,
+                  "field" : "text1",
+                  "displayType" : "original",
+                  "type" : "text"
+                },
+                {
+                  "height" : 23,
+                  "_id" : "695e372839e0190fe9d11b8e",
+                  "x" : 0,
+                  "y" : 31,
+                  "width" : 4,
+                  "field" : "textarea1",
+                  "type" : "textarea",
+                  "displayType" : "original"
+                },
+                {
+                  "height" : 8,
+                  "x" : 4,
+                  "_id" : "695e372a0f816c81c5ec2569",
+                  "y" : 23,
+                  "width" : 4,
+                  "field" : "number1",
+                  "displayType" : "original",
+                  "type" : "number"
+                },
+                {
+                  "height" : 8,
+                  "_id" : "695e372c35af0d85330ca115",
+                  "format" : "MM/DD/YYYY hh:mma",
+                  "y" : 31,
+                  "x" : 4,
+                  "width" : 4,
+                  "field" : "date1",
+                  "displayType" : "original",
+                  "type" : "date"
+                },
+                {
+                  "format" : "MM/DD/YYYY",
+                  "_id" : "695e372d8b37e9457430ae18",
+                  "x" : 4,
+                  "y" : 39,
+                  "height" : 8,
+                  "width" : 4,
+                  "field" : "date2",
+                  "type" : "date",
+                  "displayType" : "original"
+                },
+                {
+                  "height" : 8,
+                  "_id" : "695e372f63d3fba4ec94092f",
+                  "x" : 4,
+                  "y" : 47,
+                  "format" : "hh:mma",
+                  "width" : 4,
+                  "field" : "date3",
+                  "type" : "date",
+                  "displayType" : "original"
+                },
+                {
+                  "x" : 0,
+                  "height" : 8,
+                  "_id" : "695e373d8c0a74c0bf2b2932",
+                  "y" : 54,
+                  "targetValue" : "695e357dfc6d3bdb3ace38fb",
+                  "width" : 4,
+                  "field" : "dropdown1",
+                  "displayType" : "original",
+                  "type" : "dropdown"
+                },
+                {
+                  "height" : 15,
+                  "_id" : "695e373f6defad3973f9148b",
+                  "x" : 0,
+                  "targetValue" : "695e357da6309457c54b4292",
+                  "y" : 62,
+                  "width" : 4,
+                  "field" : "multiSelect1",
+                  "type" : "multiSelect",
+                  "displayType" : "original"
+                },
+                {
+                  "height" : 15,
+                  "x" : 4,
+                  "targetValue" : "695e357d32af7bcf81223a6a",
+                  "y" : 55,
+                  "_id" : "695e3741238d8824d11391f0",
+                  "width" : 4,
+                  "field" : "multiSelect2",
+                  "displayType" : "original",
+                  "type" : "multiSelect"
+                },
+                {
+                  "x" : 4,
+                  "height" : 8,
+                  "targetValue" : "695e357d6d35e7667df8432f",
+                  "y" : 70,
+                  "_id" : "695e3744cf20fd03f9e2fad8",
+                  "width" : 4,
+                  "field" : "multiSelect3",
+                  "type" : "multiSelect",
+                  "displayType" : "horizontal"
+                },
+                {
+                  "_id" : "695e3757f1cba75eeba2c5d0",
+                  "x" : 0,
+                  "height" : 23,
+                  "y" : 77,
+                  "width" : 4,
+                  "field" : "signature1",
+                  "displayType" : "original",
+                  "type" : "signature"
+                }
+              ],
+              "cols" : 8,
+              "layout" : "grid",
+              "width" : 816,
+              "padding" : 24,
+              "name" : "New Page",
+              "rowHeight" : 8
+            },
+            {
+              "height" : 1056,
+              "layout" : "grid",
+              "_id" : "695e375da819cd4e2da9161f",
+              "fieldPositions" : [
+                {
+                  "_id" : "695e378a7d31b4337a7b1f23",
+                  "x" : 0,
+                  "height" : 40,
+                  "y" : 0,
+                  "width" : 8,
+                  "field" : "collection1",
+                  "displayType" : "original",
+                  "type" : "collection"
+                },
+                {
+                  "_id" : "69a825d9662e2f496ade9305",
+                  "x" : 0,
+                  "height" : 26,
+                  "y" : 40,
+                  "width" : 8,
+                  "field" : "collection2",
+                  "type" : "collection",
+                  "displayType" : "original"
+                },
+                {
+                  "x" : 0,
+                  "_id" : "69a82613e2bd2ed06b05a27a",
+                  "height" : 44,
+                  "y" : 66,
+                  "width" : 8,
+                  "field" : "collection3",
+                  "displayType" : "original",
+                  "type" : "collection"
+                }
+              ],
+              "cols" : 8,
+              "width" : 816,
+              "presentation" : "normal",
+              "padding" : 24,
+              "name" : "Collections",
+              "rowHeight" : 8
+            },
+            {
+              "height" : 1056,
+              "layout" : "grid",
+              "_id" : "695e37b58118a4fd901888ab",
+              "presentation" : "normal",
+              "fieldPositions" : [
+                {
+                  "_id" : "695e37cb088a94fa9a62b967",
+                  "x" : 0,
+                  "height" : 74,
+                  "y" : 54,
+                  "width" : 8,
+                  "field" : "chart1",
+                  "type" : "chart",
+                  "displayType" : "original",
+                  "primaryDisplayOnly" : false
+                },
+                {
+                  "height" : 54,
+                  "x" : 0,
+                  "_id" : "695e37d3b801cfe540010a2e",
+                  "y" : 0,
+                  "width" : 4,
+                  "field" : "image2",
+                  "type" : "image",
+                  "displayType" : "original"
+                }
+              ],
+              "width" : 816,
+              "cols" : 8,
+              "padding" : 24,
+              "name" : "Chart",
+              "rowHeight" : 8
+            },
+            {
+              "_id" : "69a811d2ecb0935061cce378",
+              "height" : 1056,
+              "layout" : "grid",
+              "fieldPositions" : [
+                {
+                  "x" : 0,
+                  "height" : 26,
+                  "_id" : "69a811e2a7812a67104d9f40",
+                  "y" : 0,
+                  "width" : 8,
+                  "field" : "table2",
+                  "displayType" : "original",
+                  "type" : "table"
+                },
+                {
+                  "height" : 34,
+                  "_id" : "69a826594a5eeb4a0f72a610",
+                  "x" : 0,
+                  "y" : 26,
+                  "width" : 8,
+                  "field" : "table3",
+                  "type" : "table",
+                  "displayType" : "original"
+                },
+                {
+                  "_id" : "69a826748611ad8362635f80",
+                  "height" : 40,
+                  "x" : 0,
+                  "y" : 60,
+                  "width" : 8,
+                  "field" : "table4",
+                  "type" : "table",
+                  "displayType" : "original"
+                }
+              ],
+              "presentation" : "normal",
+              "width" : 816,
+              "cols" : 8,
+              "padding" : 24,
+              "name" : "Tables",
+              "rowHeight" : 8
+            }
+          ],
+          "pageOrder" : [
+            "695e36f2c964fbbc2f3ba5ce",
+            "695e375da819cd4e2da9161f",
+            "695e37b58118a4fd901888ab",
+            "69a811d2ecb0935061cce378"
+          ],
+          "views" : [
+
+          ],
+          "name" : "New File"
+        }
+      ]
+    }
+    
