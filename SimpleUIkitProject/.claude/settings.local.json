@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/vivek/Desktop/SimpleUIkitProject -type f -name *.xcframework -o -name *.framework)",
+      "Bash(find ~/Library/Developer/Xcode/DerivedData/SimpleUIkitProject-ajrjaeuwdwheoxbylsjygotisaet -name *.swiftinterface)",
+      "Bash(find ~/Library/Developer/Xcode/DerivedData/SimpleUIkitProject-ajrjaeuwdwheoxbylsjygotisaet -name *.h -path *Joyfill*)",
+      "Bash(find ~/Library/Developer/Xcode/DerivedData/SimpleUIkitProject-ajrjaeuwdwheoxbylsjygotisaet -name *.framework -o -name *.xcframework)",
+      "Bash(find ~/Library/Developer/Xcode/DerivedData/SimpleUIkitProject-ajrjaeuwdwheoxbylsjygotisaet/SourcePackages/checkouts/components-swift -name *DocumentEditor* -type f)",
+      "Bash(grep -n \"^\\\\s*public.*{$\\\\|^\\\\s*public func\\\\|^\\\\s*public var\" ~/Library/Developer/Xcode/DerivedData/SimpleUIkitProject-ajrjaeuwdwheoxbylsjygotisaet/SourcePackages/checkouts/components-swift/Sources/JoyfillUI/ViewModels/DocumentEditor.swift)"
+    ]
+  }
+}

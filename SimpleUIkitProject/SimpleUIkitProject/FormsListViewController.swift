@@ -80,6 +80,7 @@ extension FormsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let formVC = SimpleFormContainerViewController()
+        formVC.formTitle = forms[indexPath.row].title
         navigationController?.pushViewController(formVC, animated: true)
     }
 }
