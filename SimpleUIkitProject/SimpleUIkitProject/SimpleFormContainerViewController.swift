@@ -41,7 +41,6 @@ class SimpleFormContainerViewController: UIViewController {
         super.viewDidLoad()
         title = formTitle
         view.backgroundColor = .systemBackground
-        additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: footerContentHeight, right: 0)
         createFooterView()
         setupFormNavigation()
     }
@@ -49,6 +48,11 @@ class SimpleFormContainerViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         attachFooterWindow()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.additionalSafeAreaInsets.bottom = footerContentHeight
     }
 
     override func viewWillDisappear(_ animated: Bool) {

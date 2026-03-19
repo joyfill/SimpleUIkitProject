@@ -18,7 +18,7 @@ class FormContainerViewController: UIViewController {
         self.currentPage = currentPage
         super.init(nibName: nil, bundle: nil)
         self.document = document ?? sampleJSONDocument()
-        self.documentEditor = DocumentEditor(document: self.document!, mode: .fill, pageID: currentPage, validateSchema: false)
+        self.documentEditor = DocumentEditor(document: self.document!, mode: .fill, pageID: currentPage, isPageDuplicateEnabled: true, validateSchema: false)
     }
 
     func sampleJSONDocument() -> JoyDoc {
