@@ -32,38 +32,3 @@ enum AppTheme {
         }.resizableImage(withCapInsets: .zero, resizingMode: .stretch)
     }
 }
-
-// MARK: - FooterPassthroughWindow
-// Lets touches fall through transparent areas so the form stays interactive
-
-class FooterPassthroughWindow: UIWindow {
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let hit = super.hitTest(point, with: event)
-        return hit == rootViewController?.view ? nil : hit
-    }
-}
-
-// MARK: - GradientView
-// Reusable UIView whose background always fills with the app gradient
-
-class GradientView: UIView {
-    private let gradientLayer = CAGradientLayer()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        gradientLayer.colors = [
-            AppTheme.gradientStart.cgColor,
-            AppTheme.gradientEnd.cgColor
-        ]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint   = CGPoint(x: 1, y: 0)
-        layer.insertSublayer(gradientLayer, at: 0)
-    }
-
-    required init?(coder: NSCoder) { fatalError() }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        gradientLayer.frame = bounds
-    }
-}

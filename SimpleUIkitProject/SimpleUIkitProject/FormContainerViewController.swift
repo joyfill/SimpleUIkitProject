@@ -12,13 +12,16 @@ class FormContainerViewController: UIViewController {
     var document: JoyDoc!
     var currentPage: String? = nil
     var documentEditor: DocumentEditor!
+    private let footerController = SampleFormFooterController()
 
     init(document: JoyDoc? = nil, currentPage: String? = nil) {
         self.document = document
         self.currentPage = currentPage
         super.init(nibName: nil, bundle: nil)
         self.document = document ?? sampleJSONDocument()
-        self.documentEditor = DocumentEditor(document: self.document!, mode: .fill, pageID: currentPage, isPageDuplicateEnabled: true, validateSchema: false)
+        self.documentEditor = DocumentEditor(document: self.document!, mode: .fill, pageID: currentPage, isPageDuplicateEnabled: true, isPageDeleteEnabled: true, validateSchema: false, singleClickRowEdit: true)
+        self.documentEditor.events = footerController
+        footerController.documentEditor = documentEditor
     }
 
     func sampleJSONDocument() -> JoyDoc {
@@ -54,5 +57,8 @@ class FormContainerViewController: UIViewController {
     @ViewBuilder
     var joyFillView: some View {
         Form(documentEditor: self.documentEditor)
+            .formFooter {
+                SampleFormFooterBar(controller: self.footerController)
+            }
     }
 }
