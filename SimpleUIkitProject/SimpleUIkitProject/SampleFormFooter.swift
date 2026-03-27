@@ -15,12 +15,19 @@ final class SampleFormFooterController: ObservableObject, FormChangeEvent {
 
     weak var documentEditor: DocumentEditor?
 
+    @Published private(set) var isFooterVisible = true
     @Published private(set) var showValidationBar = false
     @Published private(set) var completedText = ""
     @Published private(set) var navigationEnabled = false
 
+    private var footerPageID: String?
     private var fieldPaths: [String] = []
     private var currentFieldIndex: Int = -1
+
+    func configureFooterVisibility(visibleOnPageID pageID: String?, initialPageID: String? = nil) {
+        footerPageID = pageID
+        updateFooterVisibility(for: initialPageID)
+    }
 
     func submitTapped() {
         guard let editor = documentEditor else { return }
@@ -74,8 +81,20 @@ final class SampleFormFooterController: ObservableObject, FormChangeEvent {
         }
     }
 
-    func onFocus(event: Event) {}
-    func onBlur(event: Event) {}
+    func onFocus(event: Event) {
+        let focusedPageID = event.pageEvent?.page.id ?? event.fieldEvent?.pageID
+        updateFooterVisibility(for: focusedPageID)
+    }
+
+    func onBlur(event: Event) {
+        guard let pageEvent = event.pageEvent,
+              pageEvent.type == "page.blur",
+              let blurredPageID = pageEvent.page.id else { return }
+
+        if blurredPageID == footerPageID {
+            isFooterVisible = false
+        }
+    }
     func onUpload(event: Joyfill.UploadEvent) {}
     func onCapture(event: Joyfill.CaptureEvent) {}
     func onError(error: Joyfill.JoyfillError) {}
@@ -112,6 +131,20 @@ final class SampleFormFooterController: ObservableObject, FormChangeEvent {
                     }
             }
     }
+
+    private func updateFooterVisibility(for pageID: String?) {
+        guard let footerPageID else {
+            isFooterVisible = true
+            return
+        }
+
+        guard let pageID else {
+            isFooterVisible = true
+            return
+        }
+
+        isFooterVisible = (pageID == footerPageID)
+    }
 }
 
 // MARK: - SwiftUI bar
@@ -120,25 +153,27 @@ struct SampleFormFooterBar: View {
     @ObservedObject var controller: SampleFormFooterController
 
     var body: some View {
-        VStack(spacing: 0) {
-            if controller.showValidationBar {
-                validationContent
-            } else {
-                submitContent
+        if controller.isFooterVisible {
+            VStack(spacing: 0) {
+                if controller.showValidationBar {
+                    validationContent
+                } else {
+                    submitContent
+                }
             }
-        }
-        .frame(maxWidth: .infinity)
-        .frame(minHeight: 56)
-        .background(
-            LinearGradient(
-                colors: [
-                    Color(uiColor: AppTheme.gradientStart),
-                    Color(uiColor: AppTheme.gradientEnd)
-                ],
-                startPoint: .leading,
-                endPoint: .trailing
+            .frame(maxWidth: .infinity)
+            .frame(minHeight: 56)
+            .background(
+                LinearGradient(
+                    colors: [
+                        Color(uiColor: AppTheme.gradientStart),
+                        Color(uiColor: AppTheme.gradientEnd)
+                    ],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
             )
-        )
+        }
     }
 
     private var submitContent: some View {
