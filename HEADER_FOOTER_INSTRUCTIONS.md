@@ -1,35 +1,38 @@
-# Persistent Footer with Joyfill Validation (UIKit)
+# Persistent Footer with Joyfill Validation (UIKit + SwiftUI)
 
-This guide explains how this example keeps a **custom gradient footer** visible at all times while the Joyfill form is shown—even when the SDK pushes table/collection modals or presents sheets. The pattern uses a second window that floats above the main content; only the footer is drawn there, and touches elsewhere pass through to the form.
+This guide explains how this example implements a **gradient footer** with **Submit** and **validation navigation** while the Joyfill form is shown. The footer is built with SwiftUI and attached through Joyfill’s **`formFooter`** API on `Form`, so it stays part of the form’s layout (no separate overlay `UIWindow`).
 
 ---
 
 ## What This Example Does
 
-- **Footer** at the **bottom**: two states — a **Submit button** (default) and a **validation bar** ("X of Y Completed" + up ↑ / down ↓ / close ✕).
-- **Form** in the main window: uses `FormContainerViewController` (wraps `DocumentEditor` + Joyfill `Form` in a `UIHostingController`).
-- **No header** in this project; the instructions below explain how to add one if needed.
+- **Footer** at the **bottom**: two states — a **Submit** button (default) and a **validation bar** (“X of Y Completed” + up ↑ / down ↓ / close ✕).
+- **Form** in `FormContainerViewController`: `DocumentEditor` + Joyfill `Form` in a `UIHostingController`, with `.formFooter { SampleFormFooterBar(...) }`.
+- **Page-aware visibility**: the footer is intended for a **default page** (the first page in the document for this sample). When the user focuses another page, the footer can hide; when they return to that page, it shows again (`onFocus` / `onBlur` on `SampleFormFooterController`).
+- **No separate header** in this project; you can add UIKit/SwiftUI chrome above the form the same way you embed `FormContainerViewController`.
 
 ---
 
 ## How It Works
 
-1. **Two windows**
-   - **Main window:** Your app window (`UINavigationController` → `FormsListViewController` → `SimpleFormContainerViewController`).
-   - **Footer window:** A second `UIWindow` (`FooterPassthroughWindow`) with a higher `windowLevel` (`.statusBar`) so it draws on top. Its root view is clear; only the `GradientView` footer is drawn inside it.
+1. **`Form` + `formFooter`**
+   - `FormContainerViewController` exposes a SwiftUI `joyFillView` that wraps `Form(documentEditor:)` and uses `.formFooter { SampleFormFooterBar(controller: footerController) }`.
+   - Joyfill lays out the footer below the form content, so it scrolls and behaves with the form instead of requiring a second window.
 
-2. **Touch passthrough**
-   - `FooterPassthroughWindow` overrides `hitTest`: if the hit view is the root view (transparent background), it returns `nil` so the touch goes to the window below (the form). Touches on the footer hit those views, so they stay interactive.
+2. **`SampleFormFooterController`**
+   - `ObservableObject` that also conforms to **`FormChangeEvent`** and is set as `documentEditor.events`.
+   - Holds weak `documentEditor`, published state (`showValidationBar`, `completedText`, `navigationEnabled`, `isFooterVisible`), and implements **Submit → validate → ↑/↓ goto → close**, plus **live validation** in `onChange`.
+   - **`configureFooterVisibility(visibleOnPageID:initialPageID:)`** ties the footer to a page ID (from `FormContainerViewController.defaultFooterPageID`). **`onFocus`** / **`onBlur`** update whether the bar is visible when the user switches pages.
 
-3. **Self-managed footer window**
-   - The footer window is created and destroyed entirely within `SimpleFormContainerViewController` via `attachFooterWindow()` / `detachFooterWindow()`. There is no global overlay reference in `SceneDelegate`.
+3. **`SampleFormFooterBar`**
+   - SwiftUI view that reads the controller’s published state, draws the same **AppTheme** linear gradient as the navigation bar, and shows either Submit or the validation row (min height 56 pt).
 
-4. **Reserving space**
-   - `SimpleFormContainerViewController` sets `additionalSafeAreaInsets.bottom = footerContentHeight (56 pt)` in `viewDidLoad` so the form's scroll content isn't hidden behind the footer.
+4. **`SimpleFormContainerViewController`**
+   - List → detail screen only: sets the nav **title**, loads **`Validation.json`** into a `JoyDoc`, and embeds **`FormContainerViewController`** full screen. It does **not** own the footer; all footer logic lives in `FormContainerViewController` + `SampleFormFooter.swift`.
 
-5. **Two footer states**
-   - **State 1 — Submit**: a centered "Submit" button. Shown by default and after "close" (✕) is tapped.
-   - **State 2 — Validation**: shows `"X of Y Completed"` label, up/down chevron buttons (navigate invalid fields), a separator, and a close (✕) button. Shown after Submit is tapped and `validate()` returns results.
+5. **Single navigation stack**
+   - One `UINavigationController` in `SceneDelegate` → `FormsListViewController` → push `SimpleFormContainerViewController`.
+   - `FormContainerViewController` is a **child** of `SimpleFormContainerViewController` (`addChild` / constraints), not wrapped in a nested `UINavigationController`. Joyfill handles in-form navigation (tables, sheets, etc.) internally.
 
 ---
 
@@ -37,205 +40,80 @@ This guide explains how this example keeps a **custom gradient footer** visible 
 
 | File | Role |
 |------|------|
-| **AppTheme** | `AppTheme` enum: gradient colors + `makeGradientImage()` for the nav bar. `FooterPassthroughWindow`: custom `UIWindow` whose `hitTest` passes touches through the root view. `GradientView`: `UIView` subclass that fills itself with the app gradient. |
-| **SceneDelegate** | Creates the main window, applies gradient `UINavigationBarAppearance`, and sets `FormsListViewController` as root. No overlay window here. |
-| **FormsListViewController** | `UITableView` list of forms. Tapping a row pushes `SimpleFormContainerViewController` with `formTitle` set. |
-| **FormContainerViewController** | Takes a `JoyDoc` + optional page ID, creates `DocumentEditor`, and embeds `Form(documentEditor:)` via `UIHostingController`. Exposes `documentEditor` for the parent to use. |
-| **SimpleFormContainerViewController** | Form screen: embeds `FormContainerViewController`, manages the `FooterPassthroughWindow` lifecycle, handles Submit → validate → navigate flow. Conforms to `FormChangeEvent` to keep the validation bar in sync as the user edits. |
+| **AppTheme** | `AppTheme` enum: `gradientStart` / `gradientEnd` and `makeGradientImage()` for the nav bar (and matching gradient in `SampleFormFooterBar`). |
+| **SceneDelegate** | Main `UIWindow`, `UINavigationController` root = `FormsListViewController`, gradient `UINavigationBarAppearance`. |
+| **FormsListViewController** | Table of forms; pushing `SimpleFormContainerViewController` with `formTitle` set. |
+| **SimpleFormContainerViewController** | Embeds `FormContainerViewController`; loads `Validation.json`. |
+| **FormContainerViewController** | Creates `DocumentEditor`, `UIHostingController` for `Form` + `formFooter`, owns `SampleFormFooterController`, wires `events` and footer page visibility. |
+| **SampleFormFooter.swift** | `SampleFormFooterController` (validation, navigation, `FormChangeEvent`) + `SampleFormFooterBar` (SwiftUI UI). |
 
 ---
 
-## One Navigation Controller Is Enough
+## Steps to Reproduce the Pattern in Your App
 
-This project uses a **single `UINavigationController`** for the entire app — the one created in `SceneDelegate` that wraps `FormsListViewController`. There is no second or nested `UINavigationController` anywhere.
+### 1. Shared theme (`AppTheme.swift`)
 
-- `SimpleFormContainerViewController` is **pushed** onto that nav controller from `FormsListViewController`.
-- `FormContainerViewController` is embedded inside `SimpleFormContainerViewController` as a **plain child view controller** (`addChild` / `didMove(toParent:)`), not wrapped in its own nav controller.
-- The Joyfill SDK handles all **form-internal navigation** (opening table editors, presenting sheets, pushing collection views, etc.) by itself — it does not require a host nav controller to do so.
+Use a small enum with gradient colors and `makeGradientImage()` for `UINavigationBarAppearance`, and reuse the same colors in the footer gradient (see `SampleFormFooterBar`).
 
-> **Why this matters:** wrapping the form in a nested `UINavigationController` is unnecessary and can interfere with how the SDK presents its own modals. Keep it simple: one nav controller at the app level, form as a direct child VC.
+### 2. `SceneDelegate` — one main window
 
----
+Create the window, set root to your nav controller, apply bar appearance, `makeKeyAndVisible()`. No extra windows for the footer.
 
-## Steps to Get the Same in Your App
+### 3. Footer controller (`SampleFormFooterController`)
 
-### 1. App theme helpers (AppTheme.swift)
+- Keep references to `DocumentEditor`, optional `footerPageID`, `fieldPaths`, `currentFieldIndex`.
+- **`submitTapped()`**: `documentEditor.validate()`, `buildPaths` from invalid `FieldValidity` entries, set `completedText`, `navigationEnabled`, `showValidationBar = true`.
+- **`upTapped()` / `downTapped()`**: cycle `currentFieldIndex`, call `documentEditor.goto(_:gotoConfig:)` with `GotoConfig(open: true, focus: true)` (this sample uses the same config for both).
+- **`closeTapped()`**: clear paths and `showValidationBar = false`.
+- **`onChange`**: if `showValidationBar`, re-validate, refresh paths and labels, clamp `currentFieldIndex`.
+- **`onFocus` / `onBlur`**: call `updateFooterVisibility` so the footer shows only on the page you care about (optional).
 
-Add three things to a shared file:
+### 4. Footer SwiftUI (`SampleFormFooterBar`)
 
-- **`AppTheme`** enum with `gradientStart` / `gradientEnd` colors and `makeGradientImage()` (renders a 2×1 stretchable gradient `UIImage` for `UINavigationBarAppearance`).
-- **`FooterPassthroughWindow`** — subclass `UIWindow`, override `hitTest` so touches on the root view pass through:
+- Observe the controller; if `isFooterVisible`, show either Submit or validation content inside a `LinearGradient` background (min height 56).
+- Wire buttons to `submitTapped`, `upTapped`, `downTapped`, `closeTapped`; disable/dim ↑↓ when `navigationEnabled` is false.
 
-```swift
-class FooterPassthroughWindow: UIWindow {
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let hit = super.hitTest(point, with: event)
-        return hit == rootViewController?.view ? nil : hit
-    }
-}
-```
+### 5. `FormContainerViewController`
 
-- **`GradientView`** — `UIView` subclass with a `CAGradientLayer` that fills its bounds using `AppTheme` colors.
+- Create `DocumentEditor` with your `JoyDoc` and options as needed.
+- Instantiate `SampleFormFooterController`, set `documentEditor.events = footerController`, `footerController.documentEditor = documentEditor`, then `configureFooterVisibility(visibleOnPageID:initialPageID:)`.
+- In `joyFillView`, use `Form(documentEditor:).formFooter { SampleFormFooterBar(controller: footerController) }`.
+- Embed that SwiftUI tree in `UIHostingController` and pin it to the container’s view.
 
-### 2. SceneDelegate — main window only
+### 6. Host view controller
 
-In `scene(_:willConnectTo:options:)`:
-
-- Create the main `UIWindow`, wrap your root view controller in a `UINavigationController`, apply gradient appearance, and call `makeKeyAndVisible()`.
-- **No overlay window here** — the footer window is owned by the form screen.
-
-```swift
-let window = UIWindow(windowScene: windowScene)
-let navController = UINavigationController(rootViewController: FormsListViewController())
-applyGradientAppearance(to: navController)
-window.rootViewController = navController
-window.makeKeyAndVisible()
-self.window = window
-```
-
-### 3. FormContainerViewController — form wrapper
-
-- Accept a `JoyDoc` in `init`, create a `DocumentEditor`, and expose it publicly.
-- In `viewDidLoad`, embed `Form(documentEditor: documentEditor)` in a `UIHostingController` and pin it to all four edges.
-
-### 4. SimpleFormContainerViewController — form screen
-
-#### 4a. Reserve space for the footer
-
-```swift
-override func viewDidLoad() {
-    super.viewDidLoad()
-    additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: footerContentHeight, right: 0)
-    createFooterView()      // build the GradientView with both state containers
-    setupFormNavigation()   // embed FormContainerViewController
-}
-```
-
-#### 4b. Attach / detach the footer window
-
-```swift
-override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    attachFooterWindow()
-}
-
-override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    if isMovingFromParent { detachFooterWindow() }
-}
-```
-
-`attachFooterWindow()`:
-- Guard against creating it twice and that `view.window?.windowScene` is available.
-- Create `FooterPassthroughWindow(windowScene:)`, set `windowLevel = .statusBar`, clear background, `isHidden = false`.
-- Set a plain `UIViewController` (clear background) as `rootViewController`.
-- Add the pre-built `GradientView` (`footerView`) to the root VC's view, pinned to leading/trailing/bottom with a fixed height (e.g. 80 pt).
-
-`detachFooterWindow()`: set `isHidden = true` and nil out the reference.
-
-#### 4c. Build the footer view (two states)
-
-Build the `GradientView` once in `createFooterView()`. Add two containers inside it:
-
-| Container | Contents |
-|-----------|----------|
-| `submitContainer` | A centered "Submit" `UIButton` |
-| `validationContainer` | `completedLabel` (leading), `upButton` ↑, `downButton` ↓, a hairline separator, `closeButton` ✕ (trailing) |
-
-Both containers are pinned to `footerView.topAnchor` and fill the full width with height = `footerContentHeight (56 pt)`.
-
-Toggle visibility via:
-- `showSubmitState()` → `submitContainer.isHidden = false`, `validationContainer.isHidden = true`
-- `showValidationState(completed:total:hasInvalid:)` → reverse; disable/dim up/down when no invalid fields
-
-#### 4d. Submit → validate → navigate
-
-```swift
-@objc func submitTapped() {
-    let validation = formVC.documentEditor.validate()
-    fieldPaths = buildPaths(from: validation.fieldValidities)   // invalid field/row/cell paths
-    currentFieldIndex = -1
-    showValidationState(...)
-}
-
-@objc func downTapped() {
-    currentFieldIndex = (currentFieldIndex + 1) % fieldPaths.count
-    formVC.documentEditor.goto(fieldPaths[currentFieldIndex], gotoConfig: GotoConfig(focus: true))
-}
-
-@objc func upTapped() {
-    currentFieldIndex = currentFieldIndex <= 0 ? fieldPaths.count - 1 : currentFieldIndex - 1
-    formVC.documentEditor.goto(fieldPaths[currentFieldIndex], gotoConfig: GotoConfig(open: true, focus: true))
-}
-
-@objc func closeTapped() {
-    fieldPaths = []; currentFieldIndex = -1
-    showSubmitState()
-}
-```
-
-**`buildPaths(from:)`** converts `[FieldValidity]` into a flat list of `"pageId/posId"`, `"pageId/posId/rowId"`, or `"pageId/posId/rowId/columnId"` strings (deepest invalid granularity first).
-
-#### 4e. Keep validation bar in sync — FormChangeEvent
-
-Conform to `FormChangeEvent` and implement `onChange(changes:document:)`:
-
-```swift
-func onChange(changes: [Change], document: JoyDoc) {
-    DispatchQueue.main.async {
-        guard !self.validationContainer.isHidden else { return }
-        let validation = self.formVC.documentEditor.validate()
-        self.fieldPaths = self.buildPaths(from: validation.fieldValidities)
-        // clamp currentFieldIndex if paths shrank
-        self.showValidationState(...)
-    }
-}
-```
-
-Set `formVC.documentEditor.events = self` after creating `FormContainerViewController`.
+- Push or present a screen that only embeds `FormContainerViewController` (like `SimpleFormContainerViewController`). No `additionalSafeAreaInsets` workaround is required for the footer when using `formFooter`—Joyfill accounts for the footer region.
 
 ---
 
-## Adding a Header (If You Only Have a Footer)
+## Adding a Header (Optional)
 
-1. In **`SimpleFormContainerViewController`** (or a new header window class):
-   - Add `headerWindow: FooterPassthroughWindow?` and a `UIView` (or `UIHostingController`) for the header.
-   - In `attachFooterWindow()`, also create a header window and pin the header view to the top.
-   - In `detachFooterWindow()`, also hide/nil the header window.
+If you need a fixed header **outside** Joyfill’s form:
 
-2. **Reserve space** at the top: update `additionalSafeAreaInsets` to include a `top` inset equal to the header height.
+- Add a header view or `UIHostingController` **above** the `FormContainerViewController`’s view in your parent VC, or use Joyfill’s APIs if your SDK version exposes header/toolbar slots.
+- Adjust constraints so the form hosting view sits below the header; reserve top safe area or fixed height as needed.
 
-3. **Build a header SwiftUI view** (e.g. `NavigationControlsView`) that uses the same `DocumentEditor`:
-
-```swift
-overlayVC.setHeader(NavigationControlsView(documentEditor: formVC.documentEditor, onBack: {
-    self.navigationController?.popViewController(animated: true)
-}))
-```
-
-4. After layout (e.g. in a `DispatchQueue.main.async` block inside `viewDidAppear`), update the top inset from the actual header frame height.
+The old pattern of a second `UIWindow` for a footer is **not** used in this sample anymore.
 
 ---
 
 ## Checklist
 
-- [ ] `FooterPassthroughWindow` created in the form screen's `viewDidAppear` with `windowLevel = .statusBar`.
-- [ ] Root view controller of the footer window has a clear background; `GradientView` is pinned to the bottom with a fixed height.
-- [ ] `additionalSafeAreaInsets.bottom` set in `viewDidLoad` so form content isn't hidden behind the footer.
-- [ ] Footer window is hidden and nilled in `viewWillDisappear` (only when `isMovingFromParent`).
-- [ ] `FormChangeEvent.onChange` updates the validation bar in sync with user edits.
-- [ ] `buildPaths(from:)` drills down to the deepest invalid granularity (field → row → cell).
+- [ ] `Form` uses `.formFooter { ... }` with your SwiftUI bar.
+- [ ] `SampleFormFooterController` (or equivalent) is `documentEditor.events` and implements `FormChangeEvent` for `onChange` (and optionally `onFocus` / `onBlur`).
+- [ ] Submit runs `validate()`; invalid paths are built with deepest granularity (field → row → cell) in `buildPaths`.
+- [ ] ↑ / ↓ call `goto` with a `GotoConfig` appropriate for your SDK version (here: `open` + `focus` both true).
+- [ ] Gradient styling matches your app chrome (`AppTheme`).
 
 ---
 
-## Quick Reference: This Example's Flow
+## Quick Reference: This Example’s Flow
 
-1. User taps a form in **FormsListViewController** → push **SimpleFormContainerViewController**.
-2. **`viewDidLoad`**: sets `additionalSafeAreaInsets`, builds `footerView` (Submit state), embeds `FormContainerViewController`.
-3. **`viewDidAppear`**: `attachFooterWindow()` creates `FooterPassthroughWindow` and moves `footerView` into it.
-4. Footer shows **Submit** button. User fills the form.
-5. User taps **Submit**: `validate()` runs, footer switches to validation bar ("X of Y Completed").
-6. User taps ↑ / ↓: `documentEditor.goto(fieldPaths[index])` scrolls the form to the next/previous invalid field.
-7. `onChange` fires on every field edit: validation bar updates live.
-8. User taps ✕: footer returns to Submit state.
-9. **`viewWillDisappear`** (back navigation): `detachFooterWindow()` removes the footer window.
+1. User taps a row in **FormsListViewController** → **SimpleFormContainerViewController** is pushed with a title.
+2. **SimpleFormContainerViewController** embeds **FormContainerViewController** with `Validation.json`.
+3. **FormContainerViewController** shows `Form` + **SampleFormFooterBar** via `formFooter`.
+4. User taps **Submit** → validation bar appears (“X of Y Completed”).
+5. User taps ↑ / ↓ → `goto` moves to previous/next invalid path.
+6. Edits trigger **`onChange`** → counts and paths refresh while the validation bar is visible.
+7. User taps ✕ → back to Submit state.
+8. Switching pages may hide/show the footer via **`onFocus`** / **`onBlur`** when a `footerPageID` is configured.
