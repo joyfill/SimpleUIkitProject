@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/joyfill/components-swift.git",
       "state" : {
-        "branch" : "NO-2029",
-        "revision" : "148ad556d527e55bbe567c8ca46e53daafd59d23"
+        "revision" : "44d1baf8e74a0aa6ba21fd51f45c592eec408bad",
+        "version" : "3.0.0-rc14"
       }
     }
   ],
