@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E25050242F62E137008076D8 /* Joyfill in Frameworks */ = {isa = PBXBuildFile; productRef = E25050252F62E137008076D8 /* Joyfill */; };
-		E25050262F62E137008076D8 /* JoyfillAPIService in Frameworks */ = {isa = PBXBuildFile; productRef = E25050272F62E137008076D8 /* JoyfillAPIService */; };
-		E25050282F62E137008076D8 /* JoyfillFormulas in Frameworks */ = {isa = PBXBuildFile; productRef = E25050292F62E137008076D8 /* JoyfillFormulas */; };
-		E250502A2F62E137008076D8 /* JoyfillModel in Frameworks */ = {isa = PBXBuildFile; productRef = E250502B2F62E137008076D8 /* JoyfillModel */; };
+		E23B70222F7455AA002F57D0 /* Joyfill in Frameworks */ = {isa = PBXBuildFile; productRef = E23B70212F7455AA002F57D0 /* Joyfill */; };
+		E23B70242F7455AA002F57D0 /* JoyfillAPIService in Frameworks */ = {isa = PBXBuildFile; productRef = E23B70232F7455AA002F57D0 /* JoyfillAPIService */; };
+		E23B70262F7455AA002F57D0 /* JoyfillFormulas in Frameworks */ = {isa = PBXBuildFile; productRef = E23B70252F7455AA002F57D0 /* JoyfillFormulas */; };
+		E23B70282F7455AA002F57D0 /* JoyfillModel in Frameworks */ = {isa = PBXBuildFile; productRef = E23B70272F7455AA002F57D0 /* JoyfillModel */; };
+		E23B702A2F7455AA002F57D0 /* JSONSchema in Frameworks */ = {isa = PBXBuildFile; productRef = E23B70292F7455AA002F57D0 /* JSONSchema */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,20 +44,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E250502A2F62E137008076D8 /* JoyfillModel in Frameworks */,
-				E25050242F62E137008076D8 /* Joyfill in Frameworks */,
-				E25050262F62E137008076D8 /* JoyfillAPIService in Frameworks */,
-				E25050282F62E137008076D8 /* JoyfillFormulas in Frameworks */,
+				E23B70262F7455AA002F57D0 /* JoyfillFormulas in Frameworks */,
+				E23B702A2F7455AA002F57D0 /* JSONSchema in Frameworks */,
+				E23B70222F7455AA002F57D0 /* Joyfill in Frameworks */,
+				E23B70282F7455AA002F57D0 /* JoyfillModel in Frameworks */,
+				E23B70242F7455AA002F57D0 /* JoyfillAPIService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E23B70202F7455AA002F57D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E2504FE72F62E136008076D8 = {
 			isa = PBXGroup;
 			children = (
 				E2504FF22F62E136008076D8 /* SimpleUIkitProject */,
+				E23B70202F7455AA002F57D0 /* Frameworks */,
 				E2504FF12F62E136008076D8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -89,10 +99,11 @@
 			);
 			name = SimpleUIkitProject;
 			packageProductDependencies = (
-				E25050252F62E137008076D8 /* Joyfill */,
-				E25050272F62E137008076D8 /* JoyfillAPIService */,
-				E25050292F62E137008076D8 /* JoyfillFormulas */,
-				E250502B2F62E137008076D8 /* JoyfillModel */,
+				E23B70212F7455AA002F57D0 /* Joyfill */,
+				E23B70232F7455AA002F57D0 /* JoyfillAPIService */,
+				E23B70252F7455AA002F57D0 /* JoyfillFormulas */,
+				E23B70272F7455AA002F57D0 /* JoyfillModel */,
+				E23B70292F7455AA002F57D0 /* JSONSchema */,
 			);
 			productName = SimpleUIkitProject;
 			productReference = E2504FF02F62E136008076D8 /* SimpleUIkitProject.app */;
@@ -123,7 +134,7 @@
 			mainGroup = E2504FE72F62E136008076D8;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				E250502C2F62E137008076D8 /* XCRemoteSwiftPackageReference "components-swift" */,
+				E23B701F2F745595002F57D0 /* XCRemoteSwiftPackageReference "components-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E2504FF12F62E136008076D8 /* Products */;
@@ -361,36 +372,41 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E250502C2F62E137008076D8 /* XCRemoteSwiftPackageReference "components-swift" */ = {
+		E23B701F2F745595002F57D0 /* XCRemoteSwiftPackageReference "components-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/joyfill/components-swift.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = exactVersion;
+				version = "3.0.0-rc14";
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E25050252F62E137008076D8 /* Joyfill */ = {
+		E23B70212F7455AA002F57D0 /* Joyfill */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E250502C2F62E137008076D8 /* XCRemoteSwiftPackageReference "components-swift" */;
+			package = E23B701F2F745595002F57D0 /* XCRemoteSwiftPackageReference "components-swift" */;
 			productName = Joyfill;
 		};
-		E25050272F62E137008076D8 /* JoyfillAPIService */ = {
+		E23B70232F7455AA002F57D0 /* JoyfillAPIService */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E250502C2F62E137008076D8 /* XCRemoteSwiftPackageReference "components-swift" */;
+			package = E23B701F2F745595002F57D0 /* XCRemoteSwiftPackageReference "components-swift" */;
 			productName = JoyfillAPIService;
 		};
-		E25050292F62E137008076D8 /* JoyfillFormulas */ = {
+		E23B70252F7455AA002F57D0 /* JoyfillFormulas */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E250502C2F62E137008076D8 /* XCRemoteSwiftPackageReference "components-swift" */;
+			package = E23B701F2F745595002F57D0 /* XCRemoteSwiftPackageReference "components-swift" */;
 			productName = JoyfillFormulas;
 		};
-		E250502B2F62E137008076D8 /* JoyfillModel */ = {
+		E23B70272F7455AA002F57D0 /* JoyfillModel */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E250502C2F62E137008076D8 /* XCRemoteSwiftPackageReference "components-swift" */;
+			package = E23B701F2F745595002F57D0 /* XCRemoteSwiftPackageReference "components-swift" */;
 			productName = JoyfillModel;
+		};
+		E23B70292F7455AA002F57D0 /* JSONSchema */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E23B701F2F745595002F57D0 /* XCRemoteSwiftPackageReference "components-swift" */;
+			productName = JSONSchema;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
